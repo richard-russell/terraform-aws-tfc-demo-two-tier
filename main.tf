@@ -1,4 +1,6 @@
-
+provider "aws" {
+  region = var.aws_region
+}
 
 # Create a VPC to launch our instances into
 resource "aws_vpc" "default" {
@@ -130,4 +132,10 @@ resource "aws_instance" "web" {
   # backend instances.
   subnet_id = aws_subnet.default.id
 
+  user_data     = <<-EOF
+#!/bin/bash -v
+apt-get update -y
+apt-get install -y nginx > /tmp/nginx.log
+echo "NGINX ${var.service_name} instance" >/var/www/html/index.html
+EOF
 }
