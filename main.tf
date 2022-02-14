@@ -82,7 +82,7 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_elb" "web" {
-  name = "${var.service_name}-elb"
+  name = substr("${var.service_name}-elb",0,32)
 
   subnets         = [aws_subnet.default.id]
   security_groups = [aws_security_group.elb.id]

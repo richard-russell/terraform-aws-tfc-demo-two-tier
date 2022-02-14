@@ -6,7 +6,7 @@ Terraform module which creates a two tier application comprising one ELB and one
 
 ```hcl
 module "tfc-demo-two-tier" {
-  source     = "app.terraform.io/Gritstone/tfc-demo-two-tier/aws"
+  source     = "./modules/tfc-demo-two-tier/aws"
   aws_region = "eu-west-2"
   aws_ami    = "ami-02c7ed3df628d7ba2"
   }
