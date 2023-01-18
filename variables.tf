@@ -25,5 +25,5 @@ variable "aws_ami" {
 
 variable "service_name" {
   description = "Name of the service to be created by the module"
-  default     = "demo-two-tier"
+  # default     = "demo-two-tier"
 }
