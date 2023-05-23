@@ -2,6 +2,10 @@ provider "aws" {
   region = var.aws_region
 }
 
+locals {
+  service_name = "${var.service_name}-${var.env}"
+}
+
 # Create a VPC to launch our instances into
 resource "aws_vpc" "default" {
   cidr_block = "10.0.0.0/16"
@@ -28,7 +32,7 @@ resource "aws_subnet" "default" {
 
 # A security group for the ELB so it is accessible via the web
 resource "aws_security_group" "elb" {
-  name        = "${var.service_name}_elb"
+  name        = "${local.service_name}-elb"
   description = "ELB security group"
   vpc_id      = aws_vpc.default.id
 
@@ -52,7 +56,7 @@ resource "aws_security_group" "elb" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "${var.service_name}_default"
+  name        = "${local.service_name}_default"
   description = "Default security group"
   vpc_id      = aws_vpc.default.id
 
@@ -82,7 +86,7 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_elb" "web" {
-  name = substr("${var.service_name}-elb",0,32)
+  name = substr("${local.service_name}", 0, 32)
 
   subnets         = [aws_subnet.default.id]
   security_groups = [aws_security_group.elb.id]
@@ -115,7 +119,7 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "${var.service_name}-web"
+    Name = "${local.service_name}-web"
   }
 
   # Specify the AMI
@@ -132,10 +136,10 @@ resource "aws_instance" "web" {
   # backend instances.
   subnet_id = aws_subnet.default.id
 
-  user_data     = <<-EOF
+  user_data = <<-EOF
 #!/bin/bash -v
 apt-get update -y
 apt-get install -y nginx > /tmp/nginx.log
-echo "NGINX ${var.service_name} instance" >/var/www/html/index.html
+echo "NGINX ${local.service_name} instance" >/var/www/html/index.html
 EOF
 }

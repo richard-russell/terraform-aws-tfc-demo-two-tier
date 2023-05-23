@@ -20,7 +20,12 @@ variable "aws_region" {
 # Ubuntu Precise 12.04 LTS (x64)
 variable "aws_ami" {
   description = "The AWS AMI to use for the web server"
-  default = "ami-051d5c7c7ec9cf96c"
+  default     = "ami-051d5c7c7ec9cf96c"
+}
+
+variable "env" {
+  type        = string
+  description = "Environment name"
 }
 
 variable "service_name" {
