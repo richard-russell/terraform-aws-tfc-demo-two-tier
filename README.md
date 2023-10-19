@@ -9,6 +9,7 @@ module "tfc-demo-two-tier" {
   source     = "./modules/tfc-demo-two-tier/aws"
   aws_region = "eu-west-2"
   aws_ami    = "ami-02c7ed3df628d7ba2"
+  env        = "prod"
   }
 }
 ```
@@ -19,5 +20,5 @@ Module is adapted by [Richard Russell](https://github.com/rirussel) from the [Tw
 
 ## License
 
-Mozilla Public License 2.0. See [LICENSE](https://github.com/rirussel/tfc_demo_terraform-guides/blob/master/LICENSE) for full details. 
+Mozilla Public License 2.0. See [LICENSE](https://github.com/rirussel/tfc_demo_terraform-guides/blob/master/LICENSE) for full details.
 

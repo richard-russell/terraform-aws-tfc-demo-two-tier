@@ -14,13 +14,19 @@
 
 variable "aws_region" {
   description = "AWS region to launch servers."
-  default     = "eu-west-2"
+  default     = "eu-west-1"
 }
 
 # Ubuntu Precise 12.04 LTS (x64)
 variable "aws_ami" {
   description = "The AWS AMI to use for the web server"
-  default = "ami-02c7ed3df628d7ba2"
+  default     = "ami-051d5c7c7ec9cf96c"
+}
+
+variable "env" {
+  type        = string
+  description = "Environment name"
+  default     = ""
 }
 
 variable "service_name" {
