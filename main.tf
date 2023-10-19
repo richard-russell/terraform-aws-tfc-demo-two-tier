@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  service_name = "${var.service_name}-${var.env}"
+  service_name = join("-", compact([var.service_name, var.env]))
 }
 
 # Create a VPC to launch our instances into

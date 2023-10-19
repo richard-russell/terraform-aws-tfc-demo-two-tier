@@ -26,6 +26,7 @@ variable "aws_ami" {
 variable "env" {
   type        = string
   description = "Environment name"
+  default     = ""
 }
 
 variable "service_name" {
