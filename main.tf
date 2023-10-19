@@ -56,8 +56,8 @@ resource "aws_security_group" "elb" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "${local.service_name}_default"
-  description = "Default security group"
+  name        = "2tier default SG"
+  description = "default security group"
   vpc_id      = aws_vpc.default.id
 
   # SSH access from anywhere
